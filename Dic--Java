@@ -1,0 +1,273 @@
+package jaga;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Scanner;
+
+public class DictionaryProject {
+	
+    public static void findWord(String ab) {
+    	try {    
+		    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jaga", "root", "root");
+		    String sql = "SELECT * FROM Dictinory WHERE word = ?";
+		    PreparedStatement statement = con.prepareStatement(sql);
+		    statement.setString(1, ab);
+		    ResultSet resultSet = statement.executeQuery();
+            System.out.println();
+            
+		    if (resultSet.next()) {
+		        String meaning = resultSet.getString("meaning");
+		        System.out.println("Meaning: " + meaning);
+		    } else 
+		        System.out.println(" sorry! Word not found in Dictinory.");
+		    
+		    System.out.println();
+		    
+		} catch (Exception e) {
+		    System.out.println(e);
+		}
+ }
+    public static void startGivenLetter(String ab,boolean found) {
+        try {
+           
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jaga", "root", "root");
+            String sql = "SELECT * FROM Dictinory WHERE word LIKE ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, ab + "%");
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                found = true;
+                String meaning = resultSet.getString("meaning");
+                String word = resultSet.getString("word");
+                System.out.println("Word: " + word + " " + "Meaning: " + meaning);
+            }    
+
+            if (!found) {
+                System.out.println("No Words starting with Given letter..!");
+            }
+            
+            System.out.println();
+           
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+	public static void totalWordscount() {
+		try {
+		    Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/jaga", "root", "root");
+		    Statement statement = con.createStatement();
+		    ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) AS word FROM Dictinory;");
+            System.out.println();
+            
+		    if (resultSet.next()) {
+		        int word = resultSet.getInt("word");
+		        System.out.println("Total words: " + word);
+		    } else {
+		        System.out.println("No words found in the dictionary.");
+		    }
+		    
+            System.out.println();
+		    
+		} catch (Exception e) {
+		    System.out.println(e);
+		}
+	}
+	
+	public static void totalWordscountGivenLetter(String sv) {
+		try {
+			
+		    Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/jaga", "root", "root");
+		    String sql = "SELECT count(*) as word FROM Dictinory WHERE word LIKE ?";
+		    PreparedStatement statement = con.prepareStatement(sql);
+		    statement.setString(1, sv + "%"); 
+		    ResultSet resultSet = statement.executeQuery();
+            System.out.println();
+            
+		    if (resultSet.next()) {
+		        int word = resultSet.getInt("word");
+		        System.out.println("Total words: " + word);
+		    } else {
+		        System.out.println("No words found in the dictionary.");
+		    }
+
+		    System.out.println();
+		   
+		} catch (Exception e) {
+		    System.out.println(e);
+		}
+	}
+public static void displayAll() {
+	try { 
+	    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jaga", "root", "root");
+	    String sql = "SELECT * FROM Dictinory ; ";
+	    PreparedStatement statement = con.prepareStatement(sql);
+	    ResultSet resultSet = statement.executeQuery();
+	    System.out.println();
+
+	    while (resultSet.next()) {
+	    	 
+	        String meaning = resultSet.getString("meaning");
+	        String word = resultSet.getString("word");
+	        System.out.println("Word: " + word + "  " + "Meaning: " + meaning);
+	   }
+	    
+	    System.out.println(".....These are all Words and Meaning in Dictinory.....");
+	    System.out.println();
+	    
+	} catch (Exception e) {
+	    System.out.println(e);
+	}
+}
+    public static void wordStartsWithVowel() {
+    	
+    	try {
+    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jaga", "root", "root");
+		    String sql = "SELECT  *FROM Dictinory WHERE word LIKE 'a%' or word  LIKE 'e%' or"
+		    		+ " word  LIKE 'i%'  or word  LIKE 'o%'  or word  LIKE 'u%';";
+		    PreparedStatement statement = con.prepareStatement(sql);
+		    ResultSet resultSet = statement.executeQuery();
+		    System.out.println();
+
+		    while (resultSet.next()) {    	 
+		        String word = resultSet.getString("word");
+		        String meaning=resultSet.getString("meaning");
+		        System.out.println(" words : " + word+"  "+"Meaning : "+meaning );
+		   }
+		    System.out.println("...Thease are all word Starting with vowel...");
+		    System.out.println();
+		   
+		} catch (Exception e) {
+		    System.out.println(e);
+		}
+ 
+   }
+
+    public static void countWordStartsWithVowel() {
+    	try {
+			 
+		    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jaga", "root", "root");
+		    String sql = "SELECT  count(*) as word FROM Dictinory WHERE word LIKE 'a%' or word  LIKE 'e%' or"
+		    		+ " word  LIKE 'i%'  or word  LIKE 'o%'  or word  LIKE 'u%';";
+		    PreparedStatement statement = con.prepareStatement(sql);
+		    ResultSet resultSet = statement.executeQuery();
+            System.out.println();
+		    
+		    while (resultSet.next()) { 
+		        int word = resultSet.getInt("word");
+		        System.out.println(" Total words : " + word );
+		   }
+		    System.out.println();
+		    
+		} catch (Exception e) {
+		    System.out.println(e);
+		}
+    }
+    public static void addingDictinory(String frst,String secnd) {
+    	try { 
+		    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jaga", "root", "root");
+		    String sql = "INSERT INTO Dictinory (word, meaning) VALUES (?, ?)";
+		    PreparedStatement statement = con.prepareStatement(sql);
+		    statement.setString(1, frst);
+		    statement.setString(2, secnd);
+		    int rowsAffected = statement.executeUpdate();
+
+		    if (rowsAffected > 0) {
+		        System.out.println("Added to Dictinary.");
+		    } else {
+		        System.out.println("Failed to added.");
+		    }
+		    
+		    System.out.println();
+		} catch (Exception e) {
+		    System.out.println(e);
+		}
+	}
+    
+	public static void main(String[] args) {    
+        Scanner sc=new Scanner(System.in);
+        int ch;
+       try {         
+		do{
+			System.out.println("*********************** Dictionary Menu ***************************");
+			System.out.println("1.Find a Word");
+			System.out.println("2.Display words starting with given letter");
+			System.out.println("3.Total no. of words in dictionary");
+			System.out.println("4.Total no. of words starting with given letter");
+			System.out.println("5.Display all words");
+			System.out.println("6.Display Words starting with vowels");
+			System.out.println("7.Total no. of words starting with vowels");
+			System.out.println("8.Added Words to Dictinory");
+			System.out.println("9.Exit");
+			System.out.println("*******************************************************************");
+			System.out.print("Enter your choice : ");
+			ch=sc.nextInt();
+			
+			switch(ch)
+			{
+			case 1:
+				 System.out.print("Enter the Word =");
+				    String ab = sc.next();
+				findWord(ab); 
+			break;
+			case 2:
+	            System.out.print("Enter the Starting Letter =");
+	            String abc = sc.next();
+	            boolean found = false;
+
+	            if(abc.length()>1) {
+	            	System.out.println(" Invalid Input...! ");
+	            	found=true;	
+	            	break;
+	            }
+				startGivenLetter(abc,found);
+				break;
+			case 3: 
+				totalWordscount();
+			break;
+			case 4:
+				System.out.print("Enter the Letter =");
+				String sv=sc.next();
+				if(sv.length()>1) {
+					System.out.println("Invalid input...!");
+					break;
+				}
+					totalWordscountGivenLetter(sv);
+			break;
+			case 5:
+				displayAll();
+				break;
+			case 6:
+				wordStartsWithVowel();
+				break;
+			case 7:
+				countWordStartsWithVowel();
+				break;
+			case 8:
+			    System.out.print("Enter the word =");
+			    String frst = sc.next();
+			    System.out.print("Enter  the meaning =");
+			    String secnd = sc.next();
+					addingDictinory(frst,secnd);
+				break;
+			case 9:
+				System.out.println();
+				System.out.println("Program ended"); 
+			break;
+			default: 
+				System.out.println("Invalid option");
+			}
+			
+		} while(ch!=0);
+		
+       }
+       catch(Exception e) {
+    	   System.out.println("invalid input !.... Again Run the program ");
+       }
+		
+	}	
+}
