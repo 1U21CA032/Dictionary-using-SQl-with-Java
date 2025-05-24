@@ -1,0 +1,21 @@
+create database jaga;
+use jaga;
+create table Dictinory (word varchar(100),meaning varchar(200));
+select*from Dictinory;
+insert into Dictinory values  ("af","Always And Forever"),("afe","Abercrombie & Fitch"),("ar","Artists & Repertoire");
+insert into Dictinory values  ("e","Ecstasy"),("eoe","Errors and omissions excluded"),("ecig","Electronic Cigarett"),("edating","Online dating")
+      ,("ial","I Ain't Laughing"),("ialto","I Always Love That One"),("iama","I Am Mildly Amused"),("ianand","I Am Not A Doctor"),
+        ("o","Ounce (of drugs)"),("orly","Oh, Really?"),("oa","Over Acting"),("salty","When someone is upset"),("flex","Someone is showing off"),
+        ("highkey","Liked something secretly"),("shook","They are shocked or incredibly surprised"),("spilling the tea","They are gossiping"),("wallflower","A shy person"),("busted ","Getting caught"),
+        ("g2g","Got to go"),("lurker","When someone visits a forum often"),("faq","Frequently asked questions"),("pwned","Defeated or humiliated"),
+        ("lag","When computer application is slow"),("noob","When someone is new to something"),
+        ("photobomb","When someone or something appears in a photo unexpectedly"),
+        ("spam","Type of email which is not meaningful"),("trending","Popular or fashionable at a moment"),("handle ","Nickname for a website"),("haha","Laughter"),("irl","In real life"),("nsfw","Not safe for work"),
+        ("kd","Kraft Dinner"),("kda","Kills / Deaths / Assists"),("kdr","Kill/Death Ratio"),("keed","Kid, joke"),("keel","Kill"),("lsa","Cantonese Exclamation"),
+        ("rabbit on","To talk for a long time, esp. "),("racket","Loud noise that lasts a long time."),("racket","A dishonest or illegal activity that makes money."),("rap","To talk together in a relaxed way "),
+        ("rap","To recite lyrics over a rhythmic beat."),("s.p.","British slang for the odds on a horse; essential information, the known form."),("s.t.p.","Slang for a particular horizantle") ;
+        insert into Dictinory values("saab","British slang for sabotage."),("sabbing","British slang for sabotage."),("tad","Slightly, a little."),("tail","A person who's following someone to find out where they're going and what they're doing."),
+        ("take","Stolen money or goods."),("tee off","To make someone angry, to annoy."),("thick","Not very intelligent, a bit slow mentally."),("ugg boots","Soft sheepskin boots that originated in Australia."),("ump","Umpire."),("umpteen","Many, countless."),("uncle sam","The U.S.A., the U.S. government."),("uncool.","Not good, not acceptable, not fashionable."),("uac","User Account Control"),
+        ("uae",	"United Arab Emirates"),("uak","You Already Know"),("uan","Universal Access Number"),("uark","You Already Know"),("uav","Urban Assault Vehicle"),("ub","You biggit"),("ubt","You Be Too"),("ubber","Uber, very"),("ubd","User Brain Damage"),("v","Black−American slang for an unfriendly female"),("v.a.t.","British slang for vodka and tonic."),("v.c.","American slang for Viet Cong, a north Vietnamese combatant."),
+        ("vac","British slang for a university or other higher education holiday."),("vacuum cleaner","Black−American slang for ones lungs"),("zilchNothing","Zero"),("zibi","Person from Zimbabwe"),("zing","Owned"),("zip","Ounce of marijauna"),("zit","Spot, pimple"),("zoinks","jeepers"),("yacc","Yet Another Compiler-Compiler"),("yam","And so on, blah"),("yagb","You Ain't Grizz Baby (COD)"),("yahoo","Yob, lout"),
+        ("yahwej","The name of God in hebrew"),("yak","You Already Know"),("xkcd","Web comic"),("xl","Extra Large"),("xlnt","Excellent"),("xlr","Accelerate"),("xls","MS Excel file extension"),("xm","Extreme"),("waa","Crying"),("waam","What's going on, what's up"),("waan","Want"),("wack","Low quailty, lame"),("wadr","With All Due Respect"),("waefrd","When All Else Fails, Read Directions");
